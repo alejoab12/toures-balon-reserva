@@ -4,7 +4,7 @@ WORKDIR /work/
 COPY target/*.jar /work/application
 
 # set up permissions for user `1001`
-RUN chmod 775 /work /work/application \
+RUN chmod 777 /work /work/application \
   && chown -R 1001 /work \
   && chmod -R "g+rwX" /work \
   && chown -R 1001:root /work
