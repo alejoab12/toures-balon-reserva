@@ -1,15 +1,5 @@
-
-FROM registry.access.redhat.com/ubi8/ubi-minimal:8.1
-WORKDIR /work/
-COPY target/*.jar /work/application
-
-# set up permissions for user `1001`
-RUN chmod 777 /work /work/application \
-  && chown -R 1001 /work \
-  && chmod -R "g+rwX" /work \
-  && chown -R 1001:root /work
-
+FROM openjdk:11
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
 EXPOSE 8484
-USER 1001
-
-CMD ["./application", "-Dquarkus.http.host=0.0.0.0"]
+ENTRYPOINT ["java","-jar","/app.jar"]
