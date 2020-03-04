@@ -1,5 +1,5 @@
-FROM registry.access.redhat.com/ubi8/ubi-minimal
-COPY target/*-runner /
-RUN chmod 775 /
-EXPOSE 8484
-CMD ["./application", "-Dquarkus.http.host=0.0.0.0"]
+FROM openjdk:11
+ARG JAR_FILE=target/*-runner.jar
+COPY ${JAR_FILE} app.jar
+EXPOSE 9091
+ENTRYPOINT ["java","-jar","-Dspring.profiles.active=prod","/app.jar"]
