@@ -1,5 +1,4 @@
 FROM openjdk:11
-ARG JAR_FILE=target/*
-COPY ${JAR_FILE} .
+ADD target ./
 EXPOSE 8484
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java","-jar","/*.jar"]
